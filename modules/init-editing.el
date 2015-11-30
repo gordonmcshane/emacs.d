@@ -1,6 +1,7 @@
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 4)            ;; but maintain correct appearance
 (setq-default save-interprogram-paste-before-kill t) ;; store os clipboard entry to kill ring
+(setq sentence-end-double-space nil)
 
 ;; enable narrowing commands
 (put 'narrow-to-region 'disabled nil)

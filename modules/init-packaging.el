@@ -24,6 +24,8 @@ re-downloaded in order to locate PACKAGE."
                                               "http://melpa.org/packages/"
                                               "https://melpa.org/packages/")))
 
+;; if exception happens in `package-initialize'
+;; try clearing out emacs.d/elpa/archives/melpa/archive-contents
 (package-initialize)
 
 (require-package 'use-package)
