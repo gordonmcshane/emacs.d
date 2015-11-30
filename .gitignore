@@ -43,3 +43,6 @@ tramp
 
 # irony mode server binaries
 /irony/
+
+# compiled yas snippets
+.yas-compiled-snippets.el
