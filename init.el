@@ -49,6 +49,7 @@
 (require 'init-elisp)
 (require 'init-cxx)
 (require 'init-yas)
+(require 'init-guide-key)
 (require 'init-key-bindings)
 
 (require 'server)
