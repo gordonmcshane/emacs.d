@@ -198,4 +198,8 @@ The body of the advice is in BODY."
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)
 
+;; enable on-the-fly reindentation
+(when (eval-when-compile (version< "24.4" emacs-version))
+  (electric-indent-mode 1))
+
 (provide 'init-editing)

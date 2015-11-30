@@ -1,7 +1,3 @@
-;; enable on-the-fly reindentation
-(when (eval-when-compile (version< "24.4" emacs-version))
-  (electric-indent-mode 1))
-
 ;; Compilation from Emacs
 (defun colorize-compilation-buffer ()
   "Colorize a compilation mode buffer."
