@@ -23,7 +23,7 @@
 (setq mode-require-final-newline nil)
 
 ;; delete the selection with a keypress
-(delete-selection-mode t)
+(delete-selection-mode nil)
 
 ;; revert buffers automatically when underlying files are changed externally
 (global-auto-revert-mode t)
