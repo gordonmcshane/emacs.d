@@ -6,6 +6,8 @@
 
 ;; lets see if we like cycle-spacing
 (global-set-key [remap just-one-space] 'cycle-spacing)
+(global-set-key (kbd "M-o") 'smart-open-line)
+(global-set-key [(shift return)] 'smart-open-line)
 (global-set-key [f6] 'recompile)
 (global-set-key [f7] 'recompile-all)
 
