@@ -1,7 +1,11 @@
 ;; flyspell-mode does spell-checking on the fly as you type
 (require 'flyspell)
-(setq ispell-program-name "aspell" ; use aspell instead of ispell
-      ispell-extra-args '("--sug-mode=ultra"))
+
+(use-package flyspell
+  :commands flyspell-mode
+  :init
+  (setq ispell-program-name "aspell" ; use aspell instead of ispell
+        ispell-extra-args '("--sug-mode=ultra")))
 
 (defun try-enable-flyspell ()
   (when (executable-find ispell-program-name)
