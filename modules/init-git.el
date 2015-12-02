@@ -1,7 +1,13 @@
-(use-package git-blame)
+(use-package git-blame
+  :commands git-blame-mode)
+
 (use-package gitignore-mode)
+
 (use-package gitconfig-mode)
-(use-package git-timemachine)
+
+(use-package git-timemachine
+  :commands (git-timemachine))
+
 (use-package git-commit)
 (use-package magit
   :init
