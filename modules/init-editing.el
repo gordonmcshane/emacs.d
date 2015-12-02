@@ -1,5 +1,5 @@
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
-(setq-default tab-width 4)            ;; but maintain correct appearance
+(setq-default tab-width 8)            ;; but maintain correct appearance
 (setq-default save-interprogram-paste-before-kill t) ;; store os clipboard entry to kill ring
 (setq sentence-end-double-space nil)
 
@@ -201,5 +201,23 @@ The body of the advice is in BODY."
 ;; enable on-the-fly reindentation
 (when (eval-when-compile (version< "24.4" emacs-version))
   (electric-indent-mode 1))
+
+(setq prelude-yank-indent-thresshold 1000)
+
+;; automatically indenting yanked text if in programming-modes
+(defun yank-advised-indent-function (beg end)
+  "Do indentation, as long as the region isn't too large."
+  (if (<= (- end beg) prelude-yank-indent-threshold)
+      (indent-region beg end nil)))
+
+(advise-commands "indent" (yank yank-pop) after
+  "If current mode is one of `prelude-yank-indent-modes',
+indent yanked text (with prefix arg don't indent)."
+  (if (and (not (ad-get-arg 0))
+           (not (member major-mode prelude-indent-sensitive-modes))
+           (or (derived-mode-p 'prog-mode)
+               (member major-mode prelude-yank-indent-modes)))
+      (let ((transient-mark-mode nil))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (provide 'init-editing)
