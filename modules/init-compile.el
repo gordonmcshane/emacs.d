@@ -20,6 +20,8 @@
 (require 'ansi-color)
 (add-hook 'compilation-filter-hook #'colorize-compilation-buffer)
 
+(defvar gdm/last-compilation-buffer nil)
+
 (with-eval-after-load 'compile
   (defadvice compilation-start (after gdm/save-last-compilation-buffer activate)
     "Record the compilation buffer for use later"

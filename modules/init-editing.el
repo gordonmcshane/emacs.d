@@ -202,7 +202,9 @@ The body of the advice is in BODY."
 (when (eval-when-compile (version< "24.4" emacs-version))
   (electric-indent-mode 1))
 
-(setq prelude-yank-indent-thresshold 1000)
+(defvar prelude-yank-indent-threshold 1000)
+(defvar prelude-indent-sensitive-modes nil)
+(defvar prelude-yank-indent-modes nil)
 
 ;; automatically indenting yanked text if in programming-modes
 (defun yank-advised-indent-function (beg end)
