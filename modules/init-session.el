@@ -19,6 +19,10 @@
 (setq version-control t)
 ;; Backup files even if they are under version control (git, etc)
 (setq vc-make-backup-files t)
+;; use system-move-file-to-trash if available
+(setq delete-by-moving-to-trash t)
+;; don't clobber dem symlinks
+(setq backup-by-copying t)
 
 (require 'savehist)
 (setq history-length t)
