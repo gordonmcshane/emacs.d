@@ -51,7 +51,7 @@
 
 (use-package irony
   :init
-  (setq irony-cdb-search-directory-list '("." "debug" "build"))
+  (setq irony-cdb-search-directory-list '("." "build" "debug" "release"))
   :config
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'c-mode-hook 'irony-mode)

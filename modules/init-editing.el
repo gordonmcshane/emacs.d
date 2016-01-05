@@ -96,7 +96,7 @@ point reaches the beginning or end of the buffer, stop there."
   :diminish smartparens-mode
   :init
   (setq sp-base-key-bindings 'paredit)
-  (setq sp-autoskip-closing-pair 'always)
+  ;;(setq sp-autoskip-closing-pair 'always)
   (setq sp-hybrid-kill-entire-symbol nil)
   :config
   (require 'smartparens-config)

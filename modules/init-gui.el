@@ -50,4 +50,6 @@
 ;; i like big fringes
 (fringe-mode '(15 . 10))
 
+(use-package ace-window)
+
 (provide 'init-gui)
