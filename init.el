@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq load-prefer-newer t)
 
 (defvar my-init-dir (file-name-directory load-file-name)
@@ -48,6 +55,7 @@
 (require 'init-prog-mode)
 (require 'init-elisp)
 (require 'init-cxx)
+(require 'init-rust)
 (require 'init-yas)
 (require 'init-misc-modes)
 (require 'init-guide-key)
