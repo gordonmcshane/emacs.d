@@ -10,6 +10,7 @@
       ido-auto-merge-work-directories-length -1)
 
 (ido-mode +1)
+(setq ido-everywhere +1)
 
 (use-package ido-ubiquitous
   :config
