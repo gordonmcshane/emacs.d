@@ -1,7 +1,9 @@
 (use-package rust-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-  (use-package flycheck-rust)
+  (use-package flycheck-rust
+    :config
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
   (use-package racer
     :init
     (defvar racer-cmd "/Users/gordon/bin/racer/target/release/racer")
