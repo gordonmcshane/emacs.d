@@ -1,7 +1,4 @@
-(use-package apropospriate
-  :ensure apropospriate-theme
-  :config
-  (load-theme 'apropospriate-dark t)
+(defun set-my-custom-colors ()
   (let* ((class '((class color) (min-colors 89)))
          (variant 'dark)
          (base00   (if (eq variant 'light) "#FAFAFA" "#424242"))
@@ -54,10 +51,19 @@
          (flashing-color (if (eq variant 'light) pink (color-darken-name pink 25)))
          (highlight-line-color (if (eq variant 'light) base00-1 base00+1)))
     (custom-theme-set-faces 'apropospriate-dark
+                            ;;'(flycheck-error ((t :box (:line-width 1 :color "#e57373" :style nil))))
+                            `(default ((t :background "#2e2e2e" :foreground ,base03)))
+                            '(fringe ((t :background "#353535")))
                             '(which-func ((t (:inherit font-lock-function-name-face)))) ;; which-func-face tries to be too smart
                             ;;`(diff-hl-insert ((t (:foreground ,green :background "#66BB6A"))))
                             `(whitespace-trailing ((t (:background ,base00-2 :foreground ,yellow))))
                             `(whitespace-empty ((t (:background ,base00-2 :foreground ,yellow)))))))
+
+(use-package apropospriate
+  :ensure apropospriate-theme
+  :config
+  (load-theme 'apropospriate-dark t)
+  (set-my-custom-colors))
 
 (set-mouse-color "white")
 
