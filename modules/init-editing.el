@@ -166,6 +166,14 @@ The body of the advice is in BODY."
                  before
                  (prelude-auto-save-command))
 
+;;(defun my-fill-margin (win)
+;;  (goto-char (window-start win))
+;;  (let ((left-width (car (window-margins)))
+;;        (limit (window-end win t)))
+;;    ))
+;;(defadvice linum-update-window (after paint-to-bottom (win) activate)
+;;                 (my-fill-margin win))
+
 (add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
 
 (when (version<= "24.4" emacs-version)
@@ -177,6 +185,14 @@ The body of the advice is in BODY."
 (use-package volatile-highlights
   :diminish volatile-highlights-mode
   :config (volatile-highlights-mode t))
+
+(use-package zop-to-char
+  :config
+  (global-set-key [remap zap-to-char] 'zop-to-char))
+
+(use-package easy-kill
+  :config
+  (global-set-key [remap kill-ring-save] 'easy-kill))
 
 ;; tramp, for sudo access
 (require 'tramp)
