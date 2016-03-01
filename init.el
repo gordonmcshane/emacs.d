@@ -13,6 +13,8 @@
   "Individual modules of my .emacs.d")
 (defvar my-session-dir (expand-file-name "session" my-init-dir)
   "Where session files go")
+(defvar my-pkg-data-dir (expand-file-name "pkg-data" my-init-dir)
+  "Where platform specific package files go (irony-mode server, anaconda-mode server, etc)")
 
 ;; give customized values symbols their own file
 (setq custom-file (expand-file-name "custom.el" my-init-dir))
@@ -56,6 +58,7 @@
 (require 'init-elisp)
 (require 'init-cxx)
 (require 'init-rust)
+(require 'init-python)
 (require 'init-yas)
 (require 'init-misc-modes)
 (require 'init-guide-key)

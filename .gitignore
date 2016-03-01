@@ -44,5 +44,8 @@ tramp
 # irony mode server binaries
 /irony/
 
+# platform specific package files
+/pkg-data/
+
 # compiled yas snippets
 .yas-compiled-snippets.el

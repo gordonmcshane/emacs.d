@@ -51,7 +51,10 @@
 
 (use-package irony
   :init
-  (setq irony-cdb-search-directory-list '("." "build" "debug" "release"))
+  (setq my-irony-user-dir (expand-file-name "irony" my-pkg-data-dir))
+  (setq irony-cdb-search-directory-list '("." "build" "debug" "release")
+        irony-server-install-prefix my-irony-user-dir
+        irony-user-dir my-irony-user-dir)
   :config
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'c-mode-hook 'irony-mode)
