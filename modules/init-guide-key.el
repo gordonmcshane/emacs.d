@@ -8,4 +8,9 @@
   :config
   (guide-key-mode +1))
 
+(use-package discover-my-major
+  :config
+  (global-set-key (kbd "C-h C-m") 'discover-my-major)
+  (global-set-key (kbd "C-h M-m") 'discover-my-mode))
+
 (provide 'init-guide-key)
