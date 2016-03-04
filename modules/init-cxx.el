@@ -4,7 +4,7 @@
   (c-set-offset 'substatement-open 0)
   (c-toggle-hungry-state 1))
 
-(setq my-c-mode-common-hook 'cc-mode-common-defaults)
+(defvar my-c-mode-common-hook 'cc-mode-common-defaults)
 
 ;; this will affect all modes derived from cc-mode, like
 ;; java-mode, php-mode, etc
@@ -14,9 +14,9 @@
 ;; tabs are needed here
 (defun makefile-mode-defaults ()
   (whitespace-toggle-options '(tabs))
-  (setq indent-tabs-mode t ))
+  (setq indent-tabs-mode t))
 
-(setq my-makefile-mode-hook 'makefile-mode-defaults)
+(defvar my-makefile-mode-hook 'makefile-mode-defaults)
 
 (add-hook 'makefile-mode-hook (lambda ()
                                 (run-hooks 'my-makefile-mode-hook)))
@@ -39,7 +39,28 @@
 ;; force .h files to use c++-mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-(add-hook 'c++-mode-hook 'setup-namespace-indent-rules)
+(add-hook 'c++-mode-hook #'setup-namespace-indent-rules)
+
+(defun my-valid-noise-names (x)
+  (or (listp x) (stringp x)))
+
+(defcustom custom-c-noise-macro-names () "Tap-in for .dir-local noise macro names" :safe #'my-valid-noise-names)
+
+(defun my-recreate-noise-regexps ()
+  (when (and (derived-mode-p 'c++-mode)
+             (fboundp 'c-make-noise-macro-regexps)
+             (not (null custom-c-noise-macro-names)))
+    (set (make-local-variable 'c-noise-macro-names)
+          (cond
+           ((listp custom-c-noise-macro-names) (append c-noise-macro-names custom-c-noise-macro-names))
+           ((stringp custom-c-noise-macro-names) (cons custom-c-noise-macro-names c-noise-macro-names))
+           (t c-noise-macro-names)))
+    (c-make-noise-macro-regexps)))
+
+(add-hook 'hack-local-variables-hook #'my-recreate-noise-regexps)
+
+;; ethan-wspace supercedes the need for this
+(setq c-require-final-newline '())
 
 (defun my-irony-mode-hook ()
   (define-key irony-mode-map [remap completion-at-point]
@@ -56,9 +77,9 @@
         irony-server-install-prefix my-irony-user-dir
         irony-user-dir my-irony-user-dir)
   :config
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'c++-mode-hook 'irony-mode))
+  (add-hook 'irony-mode-hook #'my-irony-mode-hook)
+  (add-hook 'c-mode-hook #'irony-mode)
+  (add-hook 'c++-mode-hook #'irony-mode))
 
 (use-package company-irony
   :init
