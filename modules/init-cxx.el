@@ -32,8 +32,7 @@
                 '(lambda (x)
                    (if (followed-by '(innamespace namespace-close))
                        0
-                     '+
-                     )))
+                     '+)))
   (c-set-offset 'inline-open 0))
 
 ;; force .h files to use c++-mode
@@ -51,10 +50,10 @@
              (fboundp 'c-make-noise-macro-regexps)
              (not (null custom-c-noise-macro-names)))
     (set (make-local-variable 'c-noise-macro-names)
-          (cond
-           ((listp custom-c-noise-macro-names) (append c-noise-macro-names custom-c-noise-macro-names))
-           ((stringp custom-c-noise-macro-names) (cons custom-c-noise-macro-names c-noise-macro-names))
-           (t c-noise-macro-names)))
+         (cond
+          ((listp custom-c-noise-macro-names) (append c-noise-macro-names custom-c-noise-macro-names))
+          ((stringp custom-c-noise-macro-names) (cons custom-c-noise-macro-names c-noise-macro-names))
+          (t c-noise-macro-names)))
     (c-make-noise-macro-regexps)))
 
 (add-hook 'hack-local-variables-hook #'my-recreate-noise-regexps)
