@@ -1,0 +1,3 @@
+[submodule "lisp/cc-mode"]
+	path = lisp/cc-mode
+	url = git@github.com:gordonmcshane/cc-mode.git

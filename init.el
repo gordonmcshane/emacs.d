@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -9,6 +8,8 @@
 
 (defvar my-init-dir (file-name-directory load-file-name)
   "The root directory of my init")
+(defvar my-lisp-dir (expand-file-name "lisp" my-init-dir)
+  "Modules not in elpa")
 (defvar my-init-modules-dir (expand-file-name "modules" my-init-dir)
   "Individual modules of my .emacs.d")
 (defvar my-session-dir (expand-file-name "session" my-init-dir)
@@ -19,6 +20,8 @@
 ;; give customized values symbols their own file
 (setq custom-file (expand-file-name "custom.el" my-init-dir))
 
+;; add local source first
+(add-to-list 'load-path (expand-file-name "cc-mode" my-lisp-dir))
 ;; add modules dir to load-path
 (add-to-list 'load-path my-init-modules-dir)
 
@@ -58,7 +61,7 @@
 (require 'init-elisp)
 (require 'init-cxx)
 (require 'init-rust)
-(require 'init-python)
+;;(require 'init-python)
 (require 'init-yas)
 (require 'init-misc-modes)
 (require 'init-guide-key)
