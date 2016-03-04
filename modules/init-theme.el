@@ -53,6 +53,8 @@
     (custom-theme-set-faces 'apropospriate-dark
                             ;;'(flycheck-error ((t :box (:line-width 1 :color "#e57373" :style nil))))
                             `(default ((t :background "#2e2e2e" :foreground ,base03)))
+                            `(aw-background-face ((t (:foreground ,base00+3))))
+                            `(aw-leading-char-face ((t (:foreground ,pink-1 :background nil :weight bold))))
                             '(fringe ((t :background "#353535")))
                             '(which-func ((t (:inherit font-lock-function-name-face)))) ;; which-func-face tries to be too smart
                             ;;`(diff-hl-insert ((t (:foreground ,green :background "#66BB6A"))))
@@ -65,6 +67,8 @@
   (load-theme 'apropospriate-dark t)
   (set-my-custom-colors))
 
+(set-frame-font "Source Code Pro" nil t)
+(set-face-attribute 'default nil :height 141 :weight 'light)
 (set-mouse-color "white")
 
 (provide 'init-theme)
