@@ -1,4 +1,5 @@
 (use-package rust-mode
+  :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
   (use-package flycheck-rust

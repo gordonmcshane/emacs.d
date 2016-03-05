@@ -1,5 +1,4 @@
 ;; flyspell-mode does spell-checking on the fly as you type
-(require 'flyspell)
 
 (use-package flyspell
   :commands flyspell-mode

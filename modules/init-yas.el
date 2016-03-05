@@ -1,5 +1,3 @@
-(provide 'init-yas)
-
 (use-package yasnippet
   :diminish yas-minor-mode
   :defer 15
@@ -10,3 +8,5 @@
                                yas/no-prompt))
   :config
   (yas-global-mode +1))
+
+(provide 'init-yas)

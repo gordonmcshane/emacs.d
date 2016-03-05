@@ -70,6 +70,7 @@
   (irony-cdb-autosetup-compile-options))
 
 (use-package irony
+  :commands irony-mode
   :init
   (setq my-irony-user-dir (expand-file-name "irony" my-pkg-data-dir))
   (setq irony-cdb-search-directory-list '("." "build" "debug" "release")
@@ -77,27 +78,28 @@
         irony-user-dir my-irony-user-dir)
   :config
   (add-hook 'irony-mode-hook #'my-irony-mode-hook)
-  (add-hook 'c-mode-hook #'irony-mode)
-  (add-hook 'c++-mode-hook #'irony-mode))
 
-(use-package company-irony
-  :init
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends 'company-irony)))
+  (use-package company-irony
+    :init
+    (with-eval-after-load 'company
+      (add-to-list 'company-backends 'company-irony)))
 
-(use-package company-irony-c-headers
-  :init
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends 'company-irony-c-headers)))
+  (use-package company-irony-c-headers
+    :init
+    (with-eval-after-load 'company
+      (add-to-list 'company-backends 'company-irony-c-headers)))
 
-(use-package flycheck-irony
-  :config
-  (with-eval-after-load 'flycheck
-    (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
+  (use-package flycheck-irony
+    :config
+    (with-eval-after-load 'flycheck
+      (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
-(use-package irony-eldoc
-  :config
-  (with-eval-after-load 'irony
-    (add-hook 'irony-mode-hook #'irony-eldoc)))
+  (use-package irony-eldoc
+    :config
+    (with-eval-after-load 'irony
+      (add-hook 'irony-mode-hook #'irony-eldoc))))
+
+(add-hook 'c-mode-hook #'irony-mode)
+(add-hook 'c++-mode-hook #'irony-mode)
 
 (provide 'init-cxx)

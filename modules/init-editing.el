@@ -132,6 +132,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; better kill-ring browsing
 (use-package browse-kill-ring
+  :defer t
   :config (browse-kill-ring-default-keybindings))
 
 (use-package dash)
@@ -192,10 +193,12 @@ The body of the advice is in BODY."
   :config (volatile-highlights-mode t))
 
 (use-package zop-to-char
+  :defer t
   :config
   (global-set-key [remap zap-to-char] 'zop-to-char))
 
 (use-package easy-kill
+  :defer t
   :config
   (global-set-key [remap kill-ring-save] 'easy-kill))
 
@@ -208,6 +211,7 @@ The body of the advice is in BODY."
 (set-default 'imenu-auto-rescan t)
 
 (use-package diff-hl
+  :defer t
   :config
   (global-diff-hl-mode +1)
   (with-eval-after-load 'dired

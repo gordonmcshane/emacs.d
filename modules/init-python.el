@@ -2,6 +2,7 @@
 ;;http://stackoverflow.com/questions/24257803/distutilsoptionerror-must-supply-either-home-or-prefix-exec-prefix-not-both
 
 (use-package anaconda-mode
+  :commands (anaconda-mode anaconda-eldoc-mode)
   :init
   (setq my-anaconda-user-dir (expand-file-name "anaconda-mode" my-pkg-data-dir))
   (setq anaconda-mode-installation-directory my-anaconda-user-dir)
@@ -12,6 +13,7 @@
       (add-to-list 'company-backends 'company-anaconda))))
 
 (use-package virtualenvwrapper
+  :defer t
   :init
   (setq-default venv-location "/Users/gordon/py_venvs/")
   :config
