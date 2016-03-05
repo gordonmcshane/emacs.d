@@ -1,4 +1,3 @@
-
 ;; osx doesn't support io notifications :/
 (setq auto-revert-use-notify nil)
 

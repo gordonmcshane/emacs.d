@@ -4,10 +4,7 @@
 (defun local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
 
-;; smart curly braces
-(sp-pair "{" nil :post-handlers
-         '(((lambda (&rest _ignored)
-              (smart-open-line-above)) "RET")))
+
 
 (defun common-prog-mode-defaults ()
   "Default coding hook, useful with any programming language."

@@ -89,11 +89,11 @@
 
 (desktop-save-mode 1)
 
-(use-package session
-  :init
-  (setq session-save-file (expand-file-name ".session" my-session-dir)
-        session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
-  :config
-  (session-initialize))
+;;(use-package session
+;;  :init
+;;  (setq session-save-file (expand-file-name ".session" my-session-dir)
+;;       session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
+;;  :config
+;;  (session-initialize))
 
 (provide 'init-session)

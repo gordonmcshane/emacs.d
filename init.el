@@ -36,7 +36,6 @@
   (setq mac-command-modifier 'super))
 
 (require 'init-packaging)
-(require-package 'diminish)
 
 (require 'init-core)
 (when (eq system-type 'darwin)
@@ -61,7 +60,7 @@
 (require 'init-elisp)
 (require 'init-cxx)
 (require 'init-rust)
-;;(require 'init-python)
+(require 'init-python)
 (require 'init-yas)
 (require 'init-misc-modes)
 (require 'init-guide-key)

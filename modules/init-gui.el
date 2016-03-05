@@ -50,6 +50,8 @@
 ;; i like big fringes
 (fringe-mode '(15 . 10))
 
-(use-package ace-window)
+(use-package ace-window
+  :init
+  (global-set-key (kbd "M-p") 'ace-window))
 
 (provide 'init-gui)

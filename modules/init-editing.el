@@ -16,7 +16,7 @@
 (put 'erase-buffer 'disabled nil)
 
 (use-package expand-region
-  :config (global-set-key (kbd "C-=") 'er/expand-region))
+  :bind ("C-=" . er/expand-region))
 
 ;; Newline at end of file is managed by ethan-wspace
 (setq require-final-newline nil)
@@ -25,12 +25,12 @@
 ;; delete the selection with a keypress
 (delete-selection-mode nil)
 
-;; revert buffers automatically when underlying files are changed externally
-(global-auto-revert-mode t)
 ;; lets not spam the message buffer when we change branches, etc
 (setq auto-revert-verbose nil)
 ;; revert non-file buffers when stale (trialing this)
 (setq global-auto-revert-non-file-buffers t)
+;; revert buffers automatically when underlying files are changed externally
+(global-auto-revert-mode)
 
 ;; smart tab behavior - indent or complete
 (setq tab-always-indent 'complete)
@@ -47,10 +47,10 @@
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 ;; saveplace remembers your location in a file when saving files
-(require 'saveplace)
 (setq save-place-file (expand-file-name "saveplace" my-session-dir))
 ;; activate it for all buffers
 (setq-default save-place t)
+(require 'saveplace)
 
 (defun smart-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
@@ -93,6 +93,7 @@ point reaches the beginning or end of the buffer, stop there."
       bookmark-save-flag 1)
 
 (use-package smartparens
+  :commands smartparens-mode
   :diminish smartparens-mode
   :init
   (setq sp-base-key-bindings 'paredit)
@@ -101,7 +102,11 @@ point reaches the beginning or end of the buffer, stop there."
   :config
   (require 'smartparens-config)
   (sp-use-paredit-bindings)
-  (show-smartparens-global-mode +1))
+  (show-smartparens-global-mode nil)
+  ;; smart curly braces
+  (sp-pair "{" nil :post-handlers
+           '(((lambda (&rest _ignored)
+                (smart-open-line-above)) "RET"))))
 
 ;; transient-mark-mode is on by default, but force anyway
 (transient-mark-mode +1)
@@ -195,9 +200,10 @@ The body of the advice is in BODY."
   (global-set-key [remap kill-ring-save] 'easy-kill))
 
 ;; tramp, for sudo access
-(require 'tramp)
-;; keep in mind known issues with zsh - see emacs wiki
-(setq tramp-default-method "ssh")
+(use-package tramp
+  :defer t
+  :init
+  (setq tramp-default-method "ssh")) ;; keep in mind known issues with zsh - see emacs wiki
 
 (set-default 'imenu-auto-rescan t)
 

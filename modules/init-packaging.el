@@ -31,11 +31,16 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'use-package)
 
 ;; details of loading in messages
-;;(setq use-package-verbose t)
+(setq use-package-verbose nil)
 
 ;; always get from melpa if missing
 (setq use-package-always-ensure t)
 
-(require 'use-package)
+(eval-when-compile
+  (require 'use-package))
+
+(require-package 'diminish)
+(require 'diminish)                ;; if you use :diminish
+(require 'bind-key)                ;; if you use any :bind variant
 
 (provide 'init-packaging)

@@ -61,14 +61,16 @@
                             `(whitespace-trailing ((t (:background ,base00-2 :foreground ,yellow))))
                             `(whitespace-empty ((t (:background ,base00-2 :foreground ,yellow)))))))
 
-(use-package apropospriate
-  :ensure apropospriate-theme
-  :config
-  (load-theme 'apropospriate-dark t)
-  (set-my-custom-colors))
-
-(set-frame-font "Source Code Pro" nil t)
-(set-face-attribute 'default nil :height 141 :weight 'light)
-(set-mouse-color "white")
+;; temporarily increase stack-size to allow apropospriate
+;; to use large apply call
+(let ((max-lisp-eval-depth 3000)
+      (max-specpdl-size 3000))
+  (use-package apropospriate-theme
+    :config
+    (load-theme 'apropospriate-dark t)
+    (set-my-custom-colors)
+    (set-frame-font "Source Code Pro" nil t)
+    (set-mouse-color "white")
+    (set-face-attribute 'default nil :height 141 :weight 'light)))
 
 (provide 'init-theme)
