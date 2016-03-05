@@ -9,8 +9,7 @@
 
 (use-package discover-my-major
   :commands (discover-my-major discover-my-mode)
-  :config
-  (global-set-key (kbd "C-h C-m") 'discover-my-major)
-  (global-set-key (kbd "C-h M-m") 'discover-my-mode))
+  :bind (("C-h C-m" . discover-my-major)
+         ("C-h M-m" . discover-my-mode)))
 
 (provide 'init-guide-key)
