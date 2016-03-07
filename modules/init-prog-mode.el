@@ -4,8 +4,6 @@
 (defun local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
 
-
-
 (defun common-prog-mode-defaults ()
   "Default coding hook, useful with any programming language."
   (when (executable-find ispell-program-name)

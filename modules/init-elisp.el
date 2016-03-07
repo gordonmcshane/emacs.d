@@ -1,10 +1,13 @@
 (require 'init-lisp)
 
 (use-package elisp-slime-nav
+  :defer t
   :diminish elisp-slime-nav-mode)
 (use-package rainbow-mode
+  :defer t
   :diminish rainbow-mode)
 (use-package eldoc
+  :defer t
   :diminish eldoc-mode)
 
 (defun my-recompile-elc-on-save ()
@@ -56,7 +59,7 @@ Start `ielm' if it's not already running."
   (run-hooks 'interactive-lispy-modes-hook)
   (eldoc-mode +1))
 
-(setq my-ielm-mode-hook 'ielm-mode-defaults)
+(setq my-ielm-mode-hook #'ielm-mode-defaults)
 
 (add-hook 'ielm-mode-hook (lambda ()
                             (run-hooks 'my-ielm-mode-hook)))
@@ -68,13 +71,13 @@ Start `ielm' if it's not already running."
 
 ;; enable elisp-slime-nav-mode
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-  (add-hook hook 'elisp-slime-nav-mode))
+  (add-hook hook #'elisp-slime-nav-mode))
 
 (defun conditionally-enable-smartparens-mode ()
   "Enable `smartparens-mode' in the minibuffer, during `eval-expression'."
   (if (eq this-command 'eval-expression)
       (smartparens-mode 1)))
 
-(add-hook 'minibuffer-setup-hook 'conditionally-enable-smartparens-mode)
+(add-hook 'minibuffer-setup-hook #'conditionally-enable-smartparens-mode)
 
 (provide 'init-elisp)
