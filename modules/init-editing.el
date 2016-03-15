@@ -239,13 +239,13 @@ The body of the advice is in BODY."
       (indent-region beg end nil)))
 
 (advise-commands "indent" (yank yank-pop) after
-  "If current mode is one of `prelude-yank-indent-modes',
+                 "If current mode is one of `prelude-yank-indent-modes',
 indent yanked text (with prefix arg don't indent)."
-  (if (and (not (ad-get-arg 0))
-           (not (member major-mode prelude-indent-sensitive-modes))
-           (or (derived-mode-p 'prog-mode)
-               (member major-mode prelude-yank-indent-modes)))
-      (let ((transient-mark-mode nil))
-        (yank-advised-indent-function (region-beginning) (region-end)))))
+                 (if (and (not (ad-get-arg 0))
+                          (not (member major-mode prelude-indent-sensitive-modes))
+                          (or (derived-mode-p 'prog-mode)
+                              (member major-mode prelude-yank-indent-modes)))
+                     (let ((transient-mark-mode nil))
+                       (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (provide 'init-editing)
