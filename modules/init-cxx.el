@@ -1,10 +1,22 @@
+(use-package bind-key)
+
+(defun smart-c-indent (arg)
+  (interactive "P")
+  (if mark-active
+      (indent-region (region-beginning) (region-end))
+    (c-indent-command arg)))
+
 (defun cc-mode-common-defaults ()
   (setq c-default-style "k&r"
         c-basic-offset 4)
   (c-set-offset 'substatement-open 0)
-  (c-toggle-hungry-state 1))
+  (c-toggle-hungry-state 1)
+  (bind-key "<tab>" 'smart-c-indent c-mode-base-map))
 
-(defvar my-c-mode-common-hook 'cc-mode-common-defaults)
+(defvar my-c-mode-common-hook #'cc-mode-common-defaults)
+
+(require 'init-prog-mode)
+(add-hook 'my-c-mode-common-hook #'common-prog-mode-defaults)
 
 ;; this will affect all modes derived from cc-mode, like
 ;; java-mode, php-mode, etc
