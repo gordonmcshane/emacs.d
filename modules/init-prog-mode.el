@@ -17,6 +17,6 @@
   ;;(prelude-font-lock-comment-annotations)
   )
 
-(add-hook 'prog-mode-hook 'common-prog-mode-defaults)
+(add-hook 'prog-mode-hook #'common-prog-mode-defaults)
 
 (provide 'init-prog-mode)
