@@ -89,17 +89,18 @@
         irony-server-install-prefix my-irony-user-dir
         irony-user-dir my-irony-user-dir)
   :config
+
   (add-hook 'irony-mode-hook #'my-irony-mode-hook)
 
   (use-package company-irony
     :init
     (with-eval-after-load 'company
-      (add-to-list 'company-backends 'company-irony)))
+      (add-to-list 'company-backends #'company-irony)))
 
   (use-package company-irony-c-headers
     :init
     (with-eval-after-load 'company
-      (add-to-list 'company-backends 'company-irony-c-headers)))
+      (add-to-list 'company-backends #'company-irony-c-headers)))
 
   (use-package flycheck-irony
     :config
