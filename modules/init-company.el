@@ -8,9 +8,11 @@
         company-tooltip-flip-when-above t)
   :config
   (global-company-mode 1)
+  (setq company-backends (delete 'company-semantic company-backends))
   (use-package company-quickhelp
     :ensure pos-tip
     :config
     (company-quickhelp-mode +1)))
 
 (provide 'init-company)
+

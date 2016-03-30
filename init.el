@@ -59,6 +59,7 @@
 (require 'init-prog-mode)
 (require 'init-elisp)
 (require 'init-cxx)
+(require 'init-rtags)
 (require 'init-rust)
 (require 'init-python)
 (require 'init-yas)
