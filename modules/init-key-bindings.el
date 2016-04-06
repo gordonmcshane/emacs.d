@@ -10,5 +10,7 @@
 (global-set-key [(shift return)] 'smart-open-line)
 (global-set-key [f6] 'recompile)
 (global-set-key [f7] 'recompile-all)
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 
 (provide 'init-key-bindings)
