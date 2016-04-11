@@ -1,7 +1,8 @@
 (use-package rtags
   :init
   (setq rtags-completion-enabled t)
-  (setq rtags-autostart-diagnostics t)
+  (setq rtags-autostart-diagnostics nil)
+  (setq rtags-spellcheck-enabled nil)
   :config
   (rtags-enable-standard-keybindings)
   (require 'company-rtags)
