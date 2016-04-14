@@ -17,6 +17,7 @@
   (setq-default
    magit-process-popup-time 10
    magit-diff-refine-hunk t
-   magit-completing-read-function 'magit-ido-completing-read))
+   magit-completing-read-function 'magit-ido-completing-read
+   magit-log-arguments '("--decorate" "--graph" "--color")))
 
 (provide 'init-git)
