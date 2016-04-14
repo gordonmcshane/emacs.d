@@ -122,7 +122,7 @@ point reaches the beginning or end of the buffer, stop there."
   :config
   (global-anzu-mode t)
   (global-set-key [remap query-replace] 'anzu-query-replace)
-  (global-set-key [remap query-replace-exp] 'anzu-query-replace-regexp))
+  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp))
 
 ;; DEL during isearch should edit the search string, not jump back to the previous result
 (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
@@ -247,5 +247,12 @@ indent yanked text (with prefix arg don't indent)."
                               (member major-mode prelude-yank-indent-modes)))
                      (let ((transient-mark-mode nil))
                        (yank-advised-indent-function (region-beginning) (region-end)))))
+
+(use-package string-inflection
+  :config
+  (global-set-key (kbd "C-c i") 'string-inflection-cycle)
+  (global-set-key (kbd "C-c C") 'string-inflection-camelcase)        ;; Force to CamelCase
+  (global-set-key (kbd "C-c L") 'string-inflection-lower-camelcase)  ;; Force to lowerCamelCase
+  (global-set-key (kbd "C-c J") 'string-inflection-java-style-cycle)) ;; Cycle through Java styles)
 
 (provide 'init-editing)
