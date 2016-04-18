@@ -57,6 +57,7 @@
 (require 'init-git)
 (require 'init-theme)
 (require 'init-prog-mode)
+(require 'init-org)
 (require 'init-elisp)
 (require 'init-cxx)
 (require 'init-rtags)
