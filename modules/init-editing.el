@@ -249,10 +249,9 @@ indent yanked text (with prefix arg don't indent)."
                        (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (use-package string-inflection
-  :config
-  (global-set-key (kbd "C-c i") 'string-inflection-cycle)
-  (global-set-key (kbd "C-c C") 'string-inflection-camelcase)        ;; Force to CamelCase
-  (global-set-key (kbd "C-c L") 'string-inflection-lower-camelcase)  ;; Force to lowerCamelCase
-  (global-set-key (kbd "C-c J") 'string-inflection-java-style-cycle)) ;; Cycle through Java styles)
+  :bind (("C-c i" . string-inflection-cycle)
+         ("C-c C" . string-inflection-camelcase)        ;; Force to CamelCase
+         ("C-c L" . string-inflection-lower-camelcase)  ;; Force to lowerCamelCase
+         ("C-c J" . string-inflection-java-style-cycle))) ;; Cycle through Java styles)
 
 (provide 'init-editing)

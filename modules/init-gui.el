@@ -51,7 +51,6 @@
 (fringe-mode '(15 . 10))
 
 (use-package ace-window
-  :init
-  (global-set-key (kbd "M-p") 'ace-window))
+  :bind (("C-x O" . ace-window)))
 
 (provide 'init-gui)
