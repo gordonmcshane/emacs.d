@@ -18,8 +18,8 @@ re-downloaded in order to locate PACKAGE."
 (setq package-user-dir (expand-file-name "elpa" my-init-dir))
 (setq package-enable-at-startup nil)
 
-;; slow today
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+;; sometimes slow
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives `("melpa" . ,(if (< emacs-major-version 24)
                                               "http://melpa.org/packages/"
                                               "https://melpa.org/packages/")))
