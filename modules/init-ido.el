@@ -23,6 +23,7 @@
     (flx-ido-mode +1))
   ;; smex, remember recently and most frequently used commands
   (use-package smex
+    :demand
     :init
     (setq smex-save-file (expand-file-name ".smex-items" my-session-dir))
     :config
