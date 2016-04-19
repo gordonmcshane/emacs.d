@@ -27,8 +27,8 @@
     (setq smex-save-file (expand-file-name ".smex-items" my-session-dir))
     :config
     (smex-initialize)
+    (global-set-key [remap execute-extended-command] 'smex)
     :bind
-    (("M-x" . smex)
-     ("M-X" . smex-major-mode-commands))))
+     ("M-X" . smex-major-mode-commands)))
 
 (provide 'init-ido)
