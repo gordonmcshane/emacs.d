@@ -1,7 +1,7 @@
 (defun set-my-custom-colors ()
   (let* ((class '((class color) (min-colors 89)))
          (variant 'dark)
-         (base00   (if (eq variant 'light) "#FAFAFA" "#424242"))
+         (base00   (if (eq variant 'light) "#FAFAFA" "#151718"))
          (base01   (if (eq variant 'light) "#90A4AE" "#757575"))
          (base02   (if (eq variant 'light) "#78909C" "#9E9E9E"))
          (base03   (if (eq variant 'light) "#546E7A" "#E0E0E0"))
@@ -52,7 +52,7 @@
          (highlight-line-color (if (eq variant 'light) base00-1 base00+1)))
     (custom-theme-set-faces 'apropospriate-dark
                             ;;'(flycheck-error ((t :box (:line-width 1 :color "#e57373" :style nil))))
-                            `(default ((t :background "#2e2e2e" :foreground ,base03)))
+                            ;;`(default ((t :background "#151718" :foreground ,base03)))
                             `(aw-background-face ((t (:foreground ,base00+3))))
                             `(aw-leading-char-face ((t (:foreground ,pink-1 :background nil :weight bold))))
                             '(fringe ((t :background "#353535")))
