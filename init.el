@@ -66,6 +66,7 @@
 (require 'init-misc-modes)
 (require 'init-guide-key)
 (require 'init-key-bindings)
+(require 'init-slack)
 
 (require 'server)
 (when (and (not (server-running-p)) window-system)
