@@ -9,7 +9,7 @@
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
         (rename-buffer (read-from-minibuffer "New name: " (buffer-name)))
-      (let ((new-name (read-file-name "New name: " filename)))
+      (let ((new-name (read-file-name "New name: " nil filename)))
         (cond
          ((vc-backend filename) (vc-rename-file filename new-name))
          (t
