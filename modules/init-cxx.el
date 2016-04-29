@@ -1,5 +1,8 @@
 (use-package bind-key)
 
+;; ethan-wspace supercedes the need for this
+(setq c-require-final-newline '())
+
 (defun smart-c-indent (arg)
   (interactive "P")
   (if mark-active
@@ -49,6 +52,8 @@
 
 ;; force .h files to use c++-mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
 
 (add-hook 'c++-mode-hook #'setup-namespace-indent-rules)
 
@@ -70,9 +75,6 @@
 
 (add-hook 'hack-local-variables-hook #'my-recreate-noise-regexps)
 
-;; ethan-wspace supercedes the need for this
-(setq c-require-final-newline '())
-
 (defun my-irony-mode-hook ()
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
@@ -85,7 +87,7 @@
   :commands irony-mode
   :init
   (setq my-irony-user-dir (expand-file-name "irony" my-pkg-data-dir))
-  (setq irony-cdb-search-directory-list '("." "build" "debug" "release")
+  (setq ;;irony-cdb-search-directory-list '("." "build" "debug" "release")
         irony-server-install-prefix my-irony-user-dir
         irony-user-dir my-irony-user-dir)
   :config
@@ -114,5 +116,12 @@
 
 (add-hook 'c-mode-hook #'irony-mode)
 (add-hook 'c++-mode-hook #'irony-mode)
+
+(use-package cpputils-cmake
+  :init
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode)
+                (cppcm-reload-all)))))
 
 (provide 'init-cxx)
