@@ -6,6 +6,8 @@
   "Modules not in elpa")
 (defvar my-init-modules-dir (expand-file-name "modules" my-init-dir)
   "Individual modules of my .emacs.d")
+(defvar my-personal-config-dir (expand-file-name "~/.personal")
+  "Personal config details")
 (defvar my-session-dir (expand-file-name "session" my-init-dir)
   "Where session files go")
 (defvar my-pkg-data-dir (expand-file-name "pkg-data" my-init-dir)
@@ -18,6 +20,8 @@
 (add-to-list 'load-path (expand-file-name "cc-mode" my-lisp-dir))
 ;; add modules dir to load-path
 (add-to-list 'load-path my-init-modules-dir)
+;; add personal dir to load-path
+(add-to-list 'load-path my-personal-config-dir)
 
 ;; fix osx modifiers, do this before init.el errors happen
 (when (boundp 'mac-function-modifier)
