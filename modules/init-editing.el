@@ -194,12 +194,12 @@ The body of the advice is in BODY."
 
 (use-package zop-to-char
   :defer t
-  :config
+  :init
   (global-set-key [remap zap-to-char] 'zop-to-char))
 
 (use-package easy-kill
   :defer t
-  :config
+  :init
   (global-set-key [remap kill-ring-save] 'easy-kill))
 
 ;; tramp, for sudo access
