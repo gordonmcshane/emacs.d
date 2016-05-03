@@ -21,15 +21,15 @@
     :config
     ;;; smarter fuzzy matching for ido
     (flx-ido-mode +1))
-  ;; smex, remember recently and most frequently used commands
+  ;; ido power-up for M-x
   (use-package smex
-    :demand
+    :commands (smex smex-major-mode-commands)
     :init
     (setq smex-save-file (expand-file-name ".smex-items" my-session-dir))
+    (global-set-key [remap execute-extended-command] 'smex)
     :config
     (smex-initialize)
-    (global-set-key [remap execute-extended-command] 'smex)
     :bind
-     ("M-X" . smex-major-mode-commands)))
+    ("M-X" . smex-major-mode-commands)))
 
 (provide 'init-ido)
