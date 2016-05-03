@@ -119,6 +119,7 @@
 
 (use-package cpputils-cmake
   :init
+  (setq cppcm-write-flymake-makefile nil)
   (add-hook 'c-mode-common-hook
             (lambda ()
               (when (derived-mode-p 'c-mode 'c++-mode)
