@@ -4,8 +4,9 @@
   (setq company-idle-delay 0.25
         company-tooltip-limit 50
         company-show-numbers t
-        company-minimum-prefix-length 1
+        company-minimum-prefix-length 2
         company-tooltip-flip-when-above t
+        ;; leave case unchanged when suggesting things from dabbrev
         company-dabbrev-downcase nil)
   :config
   (global-company-mode 1)
