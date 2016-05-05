@@ -3,6 +3,9 @@
 ;; ethan-wspace supercedes the need for this
 (setq c-require-final-newline '())
 
+;; lets use comment-dwim so we can can C-c C-c to comment/uncomment
+(define-key c-mode-base-map [remap comment-region] 'comment-dwim)
+
 (defun smart-c-indent (arg)
   (interactive "P")
   (if mark-active
