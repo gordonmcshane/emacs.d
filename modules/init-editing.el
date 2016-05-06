@@ -1,3 +1,10 @@
+;; Character encodings default to utf-8.
+(prefer-coding-system 'utf-8)
+(set-language-environment 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 8)            ;; but maintain correct appearance
 (setq-default save-interprogram-paste-before-kill t) ;; store os clipboard entry to kill ring
@@ -43,8 +50,8 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward) ; /foo/baz/filename
 (setq uniquify-separator "/")
-(setq uniquify-after-kill-buffer-p t)    ; rename after killing uniquified
-(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+(setq uniquify-after-kill-buffer-p t)      ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*")   ; don't muck with special buffers
 
 ;; saveplace remembers your location in a file when saving files
 (setq save-place-file (expand-file-name "saveplace" my-session-dir))
@@ -94,7 +101,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 (use-package smartparens
   :commands smartparens-mode
-  :diminish smartparens-mode
+  :diminish "()"
   :init
   (setq sp-base-key-bindings 'paredit)
   ;;(setq sp-autoskip-closing-pair 'always)
@@ -113,16 +120,15 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; people say this is more intuitive than the builtin undo system
 (use-package undo-tree
-  :config (global-undo-tree-mode)
+  :init (global-undo-tree-mode)
   :diminish undo-tree-mode)
 
 ;; lets us see what is being changed when we query/replace
 (use-package anzu
   :diminish anzu-mode
-  :config
-  (global-anzu-mode t)
-  (global-set-key [remap query-replace] 'anzu-query-replace)
-  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp))
+  :bind (("M-%" . anzu-query-replace)
+         ("C-M-%" . anzu-query-replace-regexp))
+  :init (global-anzu-mode t))
 
 ;; DEL during isearch should edit the search string, not jump back to the previous result
 (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
@@ -135,15 +141,13 @@ point reaches the beginning or end of the buffer, stop there."
   :defer t
   :config (browse-kill-ring-default-keybindings))
 
-(use-package dash)
-(use-package grizzl)
 (use-package projectile
-  :init (setq projectile-cache-file (expand-file-name  "projectile.cache" my-session-dir)
+  :init
+  (setq projectile-cache-file (expand-file-name  "projectile.cache" my-session-dir)
               projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-session-dir)
               projectile-mode-line '(:eval (format " proj[%s]" (projectile-project-name))))
-  :config
-  (add-to-list 'projectile-project-root-files-top-down-recurring "CMakeLists.txt")
-  (projectile-global-mode t))
+  (projectile-global-mode t)
+  (add-to-list 'projectile-project-root-files-top-down-recurring "CMakeLists.txt"))
 
 (setq semanticdb-default-save-directory
       (expand-file-name "semanticdb" my-session-dir))
@@ -190,33 +194,25 @@ The body of the advice is in BODY."
 
 (use-package volatile-highlights
   :diminish volatile-highlights-mode
-  :config (volatile-highlights-mode t))
+  :init (volatile-highlights-mode t))
 
 (use-package zop-to-char
-  :defer t
-  :init
-  (global-set-key [remap zap-to-char] 'zop-to-char))
+  :bind ("M-z" . zop-to-char))
 
 (use-package easy-kill
-  :defer t
-  :init
-  (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-mark))
+  :bind (("M-w" . easy-kill)
+         ("C-M-@" . easy-mark)))
 
 ;; tramp, for sudo access
 (use-package tramp
-  :defer t
-  :init
-  (setq tramp-default-method "ssh")) ;; keep in mind known issues with zsh - see emacs wiki
+  :init (setq tramp-default-method "ssh")) ;; keep in mind known issues with zsh - see emacs wiki
 
 (set-default 'imenu-auto-rescan t)
 
 (use-package diff-hl
-  :defer t
-  :config
+  :init
   (global-diff-hl-mode +1)
-  (with-eval-after-load 'dired
-    (add-hook 'dired-mode-hook 'diff-hl-dired-mode)))
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode))
 
 ;; ediff - don't start another frame
 (require 'ediff)
