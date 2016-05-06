@@ -1,4 +1,5 @@
 (use-package helm
+  :diminish helm-mode
   :config
   (use-package helm-projectile)
   (require 'helm-config)
