@@ -1,3 +1,7 @@
+;; GC optimisation.
+;; Increases garbage collection threshold to 50mb (from 0.76mb)
+(setq gc-cons-threshold 50000000)
+
 (setq load-prefer-newer t)
 
 (defvar my-init-dir (file-name-directory load-file-name)
@@ -34,7 +38,6 @@
   (setq mac-command-modifier 'super))
 
 (require 'init-packaging)
-
 (require 'init-core)
 (when (eq system-type 'darwin)
   (require 'init-osx))
