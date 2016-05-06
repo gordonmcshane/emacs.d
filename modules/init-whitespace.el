@@ -4,7 +4,8 @@
 (setq whitespace-style '(face tabs empty trailing lines-tail))
 
 (use-package ethan-wspace
-  :config
+  :diminish ethan-wspace-mode
+  :init
   (global-ethan-wspace-mode +1))
 
 ;;(defun my-buffer-cleanup ()

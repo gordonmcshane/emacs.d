@@ -2,6 +2,7 @@
 
 (use-package flyspell
   :commands flyspell-mode
+  :diminish flyspell-mode
   :init
   (setq ispell-program-name "aspell" ; use aspell instead of ispell
         ispell-extra-args '("--sug-mode=ultra")))
