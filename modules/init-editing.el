@@ -143,10 +143,16 @@ point reaches the beginning or end of the buffer, stop there."
 
 (use-package projectile
   :init
-  (setq projectile-cache-file (expand-file-name  "projectile.cache" my-session-dir)
-              projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-session-dir)
-              projectile-mode-line '(:eval (format " proj[%s]" (projectile-project-name))))
   (projectile-global-mode t)
+  (setq projectile-cache-file (expand-file-name  "projectile.cache" my-session-dir)
+	projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-session-dir))
+  (setq projectile-mode-line '((:propertize "  " face ((t :family "FontAwesome" :inherit which-func))) "["
+			       (:propertize
+				(:eval (when (ignore-errors (projectile-project-root))
+					 (projectile-project-name)))
+				face which-func mouse-face mode-line-highlight)
+			       "]")) ;; unnecessarily cool projectile modeline format
+
   (add-to-list 'projectile-project-root-files-top-down-recurring "CMakeLists.txt"))
 
 (setq semanticdb-default-save-directory
