@@ -58,6 +58,8 @@
 (setq desktop-path (list my-session-dir)
       desktop-auto-save-timeout 180)
 
+(setq desktop-restore-frames nil)
+
 (setq desktop-globals-to-save
       '((comint-input-ring        . 50)
         (compile-history          . 30)
