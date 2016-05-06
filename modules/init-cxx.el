@@ -3,9 +3,6 @@
 ;; ethan-wspace supercedes the need for this
 (setq c-require-final-newline '())
 
-;; lets use comment-dwim so we can can C-c C-c to comment/uncomment
-(define-key c-mode-base-map [remap comment-region] 'comment-dwim)
-
 (defun smart-c-indent (arg)
   (interactive "P")
   (if mark-active
@@ -15,6 +12,8 @@
 (defun cc-mode-common-defaults ()
   (setq c-default-style "k&r"
         c-basic-offset 4)
+  ;; lets use comment-dwim so we can can C-c C-c to comment/uncomment
+  (define-key c-mode-base-map [remap comment-region] 'comment-dwim)
   (c-set-offset 'substatement-open 0)
   (c-toggle-hungry-state 1)
   (bind-key "<tab>" 'smart-c-indent c-mode-base-map))
