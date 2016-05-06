@@ -16,6 +16,9 @@
 ;; not a huge bell fan
 (setq ring-bell-function 'ignore)
 
+;; hide mouse while typing
+(setq make-pointer-invisible t)
+
 ;; disable os file dialog
 (setq use-file-dialog nil)
 ;; disable os dialogs
@@ -36,6 +39,9 @@
 ;; undo/redo for window layout changes
 (winner-mode +1)
 
+;; allow pasting selection outside of emacs
+(setq x-select-enable-clipboard t)
+
 ;; more useful frame title, that show either a file or a
 ;; buffer name (if the buffer isn't visiting a file)
 (setq frame-title-format
@@ -47,10 +53,53 @@
 ;;  (add-to-list 'default-frame-alist no-border)
 ;;  (add-to-list 'initial-frame-alist no-border))
 
+(setq linum-format " %4d ")
+
+;; Disable cursor display in inactive windows.
+(setq-default cursor-in-non-selected-windows nil)
+
+;; Redraw without pause while processing input.
+(setq redisplay-dont-pause t)
+
 ;; i like big fringes
-(fringe-mode '(15 . 10))
+;;(fringe-mode '(15 . 10))
 
 (use-package ace-window
   :bind (("C-x O" . ace-window)))
+
+;; diminish some modes.
+(use-package simple
+  :ensure nil
+  :diminish visual-line-mode)
+(use-package abbrev
+  :ensure nil
+  :diminish abbrev-mode)
+
+(defvar gdm/fixed-font-name "Source Code Pro")
+(defvar gdm/fixed-font-weight 'light)
+(defvar gdm/var-font-name "Helvetica")
+(defvar gdm/font-height 141)
+
+;; Window setup.
+(add-hook 'window-setup-hook
+          (lambda nil
+            (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+            (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+            (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+            (run-with-idle-timer 0.1 nil (lambda nil (toggle-frame-maximized)))
+            (set-fringe-mode '(8 . 0))
+            (set-face-attribute
+             'default nil
+             :family gdm/fixed-font-name
+             :height gdm/font-height
+             :weight gdm/fixed-font-weight)
+            (set-face-attribute
+             'linum nil
+             :family gdm/fixed-font-name
+             :height (- gdm/font-height 20)
+             :weight gdm/fixed-font-weight)
+            (set-face-attribute
+             'variable-pitch nil
+             :family gdm/var-font-name)))
 
 (provide 'init-gui)
