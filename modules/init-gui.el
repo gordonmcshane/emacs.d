@@ -49,10 +49,6 @@
                                             (abbreviate-file-name (buffer-file-name))
                                           "%b"))))
 
-;;(let ((no-border '(internal-border-width . 0)))
-;;  (add-to-list 'default-frame-alist no-border)
-;;  (add-to-list 'initial-frame-alist no-border))
-
 (setq linum-format " %4d ")
 
 ;; Disable cursor display in inactive windows.
@@ -65,7 +61,7 @@
 ;;(fringe-mode '(15 . 10))
 
 (use-package ace-window
-  :bind (("C-x O" . ace-window)))
+  :bind (("C-x o" . ace-window)))
 
 ;; diminish some modes.
 (use-package simple
