@@ -43,7 +43,9 @@
   ;; diminish auto revert minor mode
   (setq auto-revert-mode-text (propertize " " 'face '((:family "FontAwesome"))))
   ;; revert buffers automatically when underlying files are changed externally
-  (global-auto-revert-mode +1))
+  ;;(global-auto-revert-mode +1)
+  (custom-set-variables '(global-auto-revert-mode t))
+  )
 
 ;; smart tab behavior - indent or complete
 (setq tab-always-indent 'complete)

@@ -10,7 +10,7 @@
   (when (boundp 'company-backends)
     (use-package company-anaconda
       :config
-      (add-to-list 'company-backends 'company-anaconda))))
+      (add-to-list 'company-backends (gdm/with-yas 'company-anaconda)))))
 
 (use-package virtualenvwrapper
   :defer t

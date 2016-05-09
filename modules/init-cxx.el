@@ -1,5 +1,3 @@
-(use-package bind-key)
-
 ;; ethan-wspace supercedes the need for this
 (setq c-require-final-newline '())
 
@@ -16,6 +14,7 @@
   (define-key c-mode-base-map [remap comment-region] 'comment-dwim)
   (c-set-offset 'substatement-open 0)
   (c-toggle-hungry-state 1)
+  (require 'bind-key)
   (bind-key "<tab>" 'smart-c-indent c-mode-base-map))
 
 (defvar my-c-mode-common-hook #'cc-mode-common-defaults)
@@ -87,23 +86,25 @@
 (use-package irony
   :commands irony-mode irony-cdb-autosetup-compile-options
   :init
-  (setq my-irony-user-dir (expand-file-name "irony" my-pkg-data-dir))
+  (setq my-irony-user-dir (expand-file-name "irony/" my-pkg-data-dir))
   (setq irony-server-install-prefix my-irony-user-dir
         irony-user-dir my-irony-user-dir)
 
+  (add-hook 'c-mode-common-hook (lambda () (irony-mode)))
   (add-hook 'irony-mode-hook #'my-irony-mode-hook)
 
+  :config
+
   (use-package company-irony
-    :commands (company-irony company-irony-setup-begin-commands)
-    :init
-    (with-eval-after-load 'company
-      (add-to-list 'company-backends #'company-irony)))
+    :commands (company-irony company-irony-setup-begin-commands))
 
   (use-package company-irony-c-headers
-    :commands company-irony-c-headers
-    :init
-    (with-eval-after-load 'company
-      (add-to-list 'company-backends #'company-irony-c-headers)))
+    :commands (company-irony-c-headers))
+
+  (with-eval-after-load 'company
+    (progn
+      (add-to-list 'company-backends 'company-irony)
+      (add-to-list 'company-backends 'company-irony-c-headers)))
 
   (use-package flycheck-irony
     :commands flycheck-irony-setup
@@ -116,9 +117,6 @@
     :init
     (with-eval-after-load 'irony
       (add-hook 'irony-mode-hook #'irony-eldoc))))
-
-(add-hook 'c-mode-hook #'irony-mode)
-(add-hook 'c++-mode-hook #'irony-mode)
 
 (use-package cpputils-cmake
   :init

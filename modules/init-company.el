@@ -1,7 +1,6 @@
 (use-package company
-  :diminish company-mode "  ©"
-  :commands (company-mode global-company-mode)
   :init
+  (setq company-lighter-base "©")
   (setq company-idle-delay 0.25
         company-tooltip-limit 50
         company-show-numbers t
@@ -9,10 +8,23 @@
         company-tooltip-flip-when-above t
         ;; leave case unchanged when suggesting things from dabbrev
         company-dabbrev-downcase nil)
-  (add-hook 'prog-mode-hook 'company-mode)
-  (add-hook 'comint-mode-hook 'company-mode)
+
   :config
+  (global-company-mode +1)
+
   (setq company-backends (delete 'company-semantic company-backends))
+  (setq company-backends (delete 'company-clang company-backends))
+
+  ;; let yas-snippet play too
+  (require 'dash)
+
+  (defun add-yas-snippet (backend)
+    (cond
+     ((symbolp backend) (gdm/with-yas backend))
+     (t backend)))
+
+  ;;(setq company-backends (-map #'add-yas-snippet company-backends))
+
   (use-package company-quickhelp
     :if window-system
     :config

@@ -1,11 +1,17 @@
 (use-package rtags
   :init
-  (setq rtags-completion-enabled t)
-  (setq rtags-autostart-diagnostics nil)
+  (setq rtags-completions-enabled t)
+  (setq rtags-autostart-diagnostics t)
   (setq rtags-spellcheck-enabled nil)
   (rtags-enable-standard-keybindings)
-  (require 'company-rtags)
-  (add-to-list 'company-backends 'company-rtags)
+  (rtags-diagnostics)
+
+  :config
+  ;; currently irony provides better company support
+  ;; (with-eval-after-load 'company
+  ;;   (progn
+  ;;     (require 'company-rtags)
+  ;;     (add-to-list 'company-backends 'company-rtags)))
 
   ;;(require 'flycheck-rtags)
   ;;(defun my-flycheck-rtags-setup ()
