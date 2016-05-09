@@ -3,7 +3,6 @@
   (setq rtags-completion-enabled t)
   (setq rtags-autostart-diagnostics nil)
   (setq rtags-spellcheck-enabled nil)
-  :config
   (rtags-enable-standard-keybindings)
   (require 'company-rtags)
   (add-to-list 'company-backends 'company-rtags)

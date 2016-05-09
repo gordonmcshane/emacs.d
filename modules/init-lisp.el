@@ -1,4 +1,5 @@
-(use-package rainbow-delimiters)
+(use-package rainbow-delimiters
+  :commands rainbow-delimiters-mode)
 
 (setq-default initial-scratch-message
               (concat ";; Happy hacking " user-login-name " - Emacs ♥ you!\n\n"))

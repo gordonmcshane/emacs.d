@@ -20,7 +20,6 @@
 
 (defvar my-c-mode-common-hook #'cc-mode-common-defaults)
 
-(require 'init-prog-mode)
 (add-hook 'my-c-mode-common-hook #'common-prog-mode-defaults)
 
 ;; this will affect all modes derived from cc-mode, like
@@ -86,33 +85,35 @@
   (irony-cdb-autosetup-compile-options))
 
 (use-package irony
-  :commands irony-mode
+  :commands irony-mode irony-cdb-autosetup-compile-options
   :init
   (setq my-irony-user-dir (expand-file-name "irony" my-pkg-data-dir))
-  (setq ;;irony-cdb-search-directory-list '("." "build" "debug" "release")
-        irony-server-install-prefix my-irony-user-dir
+  (setq irony-server-install-prefix my-irony-user-dir
         irony-user-dir my-irony-user-dir)
-  :config
 
   (add-hook 'irony-mode-hook #'my-irony-mode-hook)
 
   (use-package company-irony
+    :commands (company-irony company-irony-setup-begin-commands)
     :init
     (with-eval-after-load 'company
       (add-to-list 'company-backends #'company-irony)))
 
   (use-package company-irony-c-headers
+    :commands company-irony-c-headers
     :init
     (with-eval-after-load 'company
       (add-to-list 'company-backends #'company-irony-c-headers)))
 
   (use-package flycheck-irony
-    :config
+    :commands flycheck-irony-setup
+    :init
     (with-eval-after-load 'flycheck
       (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
   (use-package irony-eldoc
-    :config
+    :commands irony-eldoc
+    :init
     (with-eval-after-load 'irony
       (add-hook 'irony-mode-hook #'irony-eldoc))))
 

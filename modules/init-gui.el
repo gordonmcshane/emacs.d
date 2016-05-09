@@ -71,31 +71,32 @@
   :ensure nil
   :diminish abbrev-mode)
 
-(defvar gdm/fixed-font-name "Source Code Pro")
+(defvar gdm/fixed-font-name "Fira Code")
 (defvar gdm/fixed-font-weight 'light)
-(defvar gdm/var-font-name "Helvetica")
-(defvar gdm/font-height 141)
+(defvar gdm/var-font-name "Input Serif")
+(defvar gdm/font-height 130)
 
-;; Window setup.
-(add-hook 'window-setup-hook
-          (lambda nil
-            (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-            (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-            (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-            (run-with-idle-timer 0.1 nil (lambda nil (toggle-frame-maximized)))
-            (set-fringe-mode '(8 . 0))
-            (set-face-attribute
-             'default nil
-             :family gdm/fixed-font-name
-             :height gdm/font-height
-             :weight gdm/fixed-font-weight)
-            (set-face-attribute
-             'linum nil
-             :family gdm/fixed-font-name
-             :height (- gdm/font-height 20)
-             :weight gdm/fixed-font-weight)
-            (set-face-attribute
-             'variable-pitch nil
-             :family gdm/var-font-name)))
+(defun gdm/window-setup ()
+    (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+    (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+    (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+    (run-with-idle-timer 0.1 nil (lambda () (toggle-frame-maximized)))
+    (set-fringe-mode '(8 . 0))
+    (set-face-attribute
+     'default nil
+     :family gdm/fixed-font-name
+     :height gdm/font-height
+     :weight gdm/fixed-font-weight)
+    (set-face-attribute
+     'linum nil
+     :family gdm/fixed-font-name
+     :height (- gdm/font-height 20)
+     :weight gdm/fixed-font-weight)
+    (set-face-attribute
+     'variable-pitch
+     nil
+     :family gdm/var-font-name))
+
+(add-hook 'window-setup-hook #'gdm/window-setup)
 
 (provide 'init-gui)

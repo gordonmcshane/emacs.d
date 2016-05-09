@@ -1,7 +1,10 @@
 (use-package helm
   :diminish helm-mode
-  :config
-  (use-package helm-projectile)
+  :commands helm-mode
+  :init
+  (use-package helm-projectile
+    :commands helm-projectile-on)
+
   (require 'helm-config)
   ;;(require 'helm-projectile)
 
@@ -39,7 +42,8 @@
 
   (define-key minibuffer-local-map (kbd "C-c C-l") 'helm-minibuffer-history)
   (setq projectile-completion-system 'helm)
-  (helm-mode 1)
+
+  (helm-mode +1)
 
   (helm-projectile-on))
 

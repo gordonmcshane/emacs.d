@@ -12,7 +12,7 @@
     (ibuffer-do-sort-by-filename/process)))
 
 (use-package ibuffer-vc
-  :config
+  :init
   (add-hook 'ibuffer-hook 'ibuffer-set-up-preferred-filters))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)

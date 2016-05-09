@@ -1,13 +1,15 @@
 (require 'init-lisp)
 
 (use-package elisp-slime-nav
-  :defer t
+  :commands elisp-slime-nav-mode
   :diminish elisp-slime-nav-mode)
+
 (use-package rainbow-mode
-  :defer t
+  :commands rainbow-mode
   :diminish rainbow-mode)
+
 (use-package eldoc
-  :defer t
+  :commands eldoc-mode
   :diminish eldoc-mode)
 
 (defun my-recompile-elc-on-save ()
@@ -64,7 +66,7 @@ Start `ielm' if it's not already running."
 (add-hook 'ielm-mode-hook (lambda ()
                             (run-hooks 'my-ielm-mode-hook)))
 
-(eval-after-load "ielm"
+(eval-after-load 'ielm
   '(progn
      (define-key ielm-map (kbd "M-(") (my-wrap-with "("))
      (define-key ielm-map (kbd "M-\"") (my-wrap-with "\""))))

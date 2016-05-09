@@ -1,23 +1,24 @@
-(use-package gitignore-mode
-  :defer t)
-(use-package gitconfig-mode
-  :defer t)
-(use-package git-blame
-  :defer t)
+(use-package gitignore-mode)
+(use-package gitconfig-mode)
+
 (use-package git-timemachine
-  :defer t)
+  :commands (git-timemachine
+             git-timemachine-toggle
+             git-timemachine-switch-branch))
+
 (use-package git-commit
-  :defer t)
+  :commands global-git-commit-mode)
 
 (use-package magit
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch-popup))
-  :demand
   :init
+  (global-magit-file-mode t)
   (setq-default
    magit-process-popup-time 10
    magit-diff-refine-hunk t
+   magit-delete-by-moving-to-trash t
    magit-completing-read-function 'magit-ido-completing-read
-   magit-log-arguments '("--decorate" "--graph" "--color")))
+   magit-log-arguments '("--decorate" "--color")))
 
 (provide 'init-git)

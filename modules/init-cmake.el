@@ -4,6 +4,6 @@
 (use-package cmake-mode
   :config
   (add-hook 'cmake-mode-hook
-            'cmake-mode-defaults))
+            #'cmake-mode-defaults))
 
 (provide 'init-cmake)

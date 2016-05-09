@@ -15,8 +15,7 @@
 (use-package virtualenvwrapper
   :defer t
   :init
-  (setq-default venv-location "/Users/gordon/py_venvs/")
-  :config
+  (setq-default venv-location "/Users/gordon/.py_venvs")
   (venv-initialize-interactive-shells) ;; if you want interactive shell support
   (venv-initialize-eshell)) ;; if you want eshell support
 
@@ -67,9 +66,9 @@
 (defun python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (anaconda-mode 1)
-  (anaconda-eldoc-mode 1)
-  (eldoc-mode 1)
+  (anaconda-mode +1)
+  (anaconda-eldoc-mode +1)
+  (eldoc-mode +1)
   (setq-local electric-layout-rules
               '((?: . (lambda ()
                         (and (zerop (first (syntax-ppss)))

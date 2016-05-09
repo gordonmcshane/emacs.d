@@ -1,5 +1,9 @@
 (require 'which-func)
-(which-function-mode 1)
+
+(use-package which-func
+  :ensure nil
+  :init
+  (which-function-mode 1))
 
 (defun local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))

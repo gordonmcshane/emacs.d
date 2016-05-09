@@ -12,6 +12,6 @@
     (flyspell-mode +1)))
 
 ;; enable flyspell for text modes
-(add-hook 'text-mode-hook 'try-enable-flyspell)
+(add-hook 'text-mode-hook #'try-enable-flyspell)
 
 (provide 'init-flyspell)

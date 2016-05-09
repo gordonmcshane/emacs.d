@@ -9,7 +9,6 @@
         company-tooltip-flip-when-above t
         ;; leave case unchanged when suggesting things from dabbrev
         company-dabbrev-downcase nil)
-  ;;(global-company-mode 1)
   (add-hook 'prog-mode-hook 'company-mode)
   (add-hook 'comint-mode-hook 'company-mode)
   :config
@@ -20,4 +19,3 @@
     (company-quickhelp-mode +1)))
 
 (provide 'init-company)
-

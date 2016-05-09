@@ -1,2 +1,4 @@
-(use-package markdown-mode :defer t)
+(use-package markdown-mode
+  :commands markdown-mode)
+
 (provide 'init-misc-modes)

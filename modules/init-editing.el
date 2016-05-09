@@ -26,21 +26,24 @@
   :bind ("C-=" . er/expand-region))
 
 ;; Newline at end of file is managed by ethan-wspace
-(setq require-final-newline nil)
-(setq mode-require-final-newline nil)
+(setq require-final-newline nil
+      mode-require-final-newline nil
+      c-require-final-newline nil)
 
 ;; delete the selection with a keypress
 (delete-selection-mode nil)
 
-;; lets not spam the message buffer when we change branches, etc
-(setq auto-revert-verbose nil)
-;; revert non-file buffers when stale (trialing this)
-(setq global-auto-revert-non-file-buffers t)
-;; revert buffers automatically when underlying files are changed externally
-(global-auto-revert-mode)
-
-;; diminish auto revert minor mode
-(setq auto-revert-mode-text (propertize " " 'face '((t :family "FontAwesome"))))
+(use-package autorevert
+  :ensure nil
+  :init
+  ;; lets not spam the message buffer when we change branches, etc
+  (setq auto-revert-verbose nil)
+  ;; revert non-file buffers when stale (trialing this)
+  (setq global-auto-revert-non-file-buffers t)
+  ;; diminish auto revert minor mode
+  (setq auto-revert-mode-text (propertize " " 'face '((:family "FontAwesome"))))
+  ;; revert buffers automatically when underlying files are changed externally
+  (global-auto-revert-mode +1))
 
 ;; smart tab behavior - indent or complete
 (setq tab-always-indent 'complete)
@@ -50,17 +53,21 @@
   (global-prettify-symbols-mode))
 
 ;; meaningful names for buffers with the same name
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward) ; /foo/baz/filename
-(setq uniquify-separator "/")
-(setq uniquify-after-kill-buffer-p t)      ; rename after killing uniquified
-(setq uniquify-ignore-buffers-re "^\\*")   ; don't muck with special buffers
+(use-package uniquify
+  :ensure nil
+  :init
+  (setq uniquify-buffer-name-style 'forward) ; /foo/baz/filename
+  (setq uniquify-separator "/")
+  (setq uniquify-after-kill-buffer-p t)       ; rename after killing uniquified
+  (setq uniquify-ignore-buffers-re "^\\*"))   ; don't muck with special buffers
 
-;; saveplace remembers your location in a file when saving files
-(setq save-place-file (expand-file-name "saveplace" my-session-dir))
-;; activate it for all buffers
-(setq-default save-place t)
-(require 'saveplace)
+(use-package saveplace
+  :ensure nil
+  :init
+  ;; saveplace remembers your location in a file when saving files
+  (setq save-place-file (expand-file-name "saveplace" my-session-dir))
+  ;; activate it for all buffers
+  (setq-default save-place t))
 
 (defun smart-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
@@ -98,9 +105,11 @@ point reaches the beginning or end of the buffer, stop there."
 (with-region-or-buffer indent-region)
 (with-region-or-buffer untabify)
 
-(require 'bookmark)
-(setq bookmark-default-file (expand-file-name "bookmarks" my-session-dir)
-      bookmark-save-flag 1)
+(use-package bookmark
+  :ensure nil
+  :init
+  (setq bookmark-default-file (expand-file-name "bookmarks" my-session-dir)
+        bookmark-save-flag 1))
 
 (use-package smartparens
   :commands smartparens-mode
@@ -141,19 +150,20 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; better kill-ring browsing
 (use-package browse-kill-ring
-  :defer t
-  :config (browse-kill-ring-default-keybindings))
+  :init
+  (browse-kill-ring-default-keybindings))
 
 (use-package projectile
   :init
   (projectile-global-mode t)
   (setq projectile-cache-file (expand-file-name  "projectile.cache" my-session-dir)
 	projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" my-session-dir))
-  (setq projectile-mode-line '((:propertize "  " face ((t :family "FontAwesome" :inherit which-func))) "["
+  (setq projectile-mode-line '((:propertize "  " face ((:family "FontAwesome" :inherit which-func))) "["
 			       (:propertize
 				(:eval (when (ignore-errors (projectile-project-root))
 					 (projectile-project-name)))
-				face which-func mouse-face mode-line-highlight)
+				face which-func
+                                mouse-face mode-line-highlight)
 			       "]")) ;; unnecessarily cool projectile modeline format
 
   (add-to-list 'projectile-project-root-files-top-down-recurring "CMakeLists.txt"))
@@ -185,14 +195,6 @@ The body of the advice is in BODY."
                  before
                  (prelude-auto-save-command))
 
-;;(defun my-fill-margin (win)
-;;  (goto-char (window-start win))
-;;  (let ((left-width (car (window-margins)))
-;;        (limit (window-end win t)))
-;;    ))
-;;(defadvice linum-update-window (after paint-to-bottom (win) activate)
-;;                 (my-fill-margin win))
-
 (add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
 
 (when (version<= "24.4" emacs-version)
@@ -214,6 +216,7 @@ The body of the advice is in BODY."
 
 ;; tramp, for sudo access
 (use-package tramp
+  :ensure nil
   :init (setq tramp-default-method "ssh")) ;; keep in mind known issues with zsh - see emacs wiki
 
 (set-default 'imenu-auto-rescan t)
@@ -224,8 +227,10 @@ The body of the advice is in BODY."
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode))
 
 ;; ediff - don't start another frame
-(require 'ediff)
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(use-package ediff
+  :ensure nil
+  :init
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)

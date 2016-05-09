@@ -71,7 +71,7 @@
 ;;      (set-my-custom-colors))
 
 (use-package darkokai-theme
-  :config (load-theme 'darkokai t))
+  :init (load-theme 'darkokai t))
 
 ;; (custom-theme-set-faces 'darkokai
 ;;  '(default ((t (:family "Source Code Pro" :foundry "nil" :slant normal :weight light :height 141 :width normal)))))
