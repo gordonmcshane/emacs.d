@@ -61,7 +61,9 @@
 ;;(fringe-mode '(15 . 10))
 
 (use-package ace-window
-  :bind (("C-x o" . ace-window)))
+  :bind (("C-x o" . ace-window))
+  :init
+  (setq aw-ignored-buffers '("*Calc Trail*" "*LV*" "*Helm Find Files*" "*helm mini*" "*helm M-x*")))
 
 ;; diminish some modes.
 (use-package simple

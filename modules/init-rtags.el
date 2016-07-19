@@ -1,12 +1,14 @@
 (use-package rtags
+  :load-path "/usr/local/share/emacs/site-lisp/rtags"
+  :ensure nil
   :init
   (setq rtags-completions-enabled t)
   (setq rtags-autostart-diagnostics t)
   (setq rtags-spellcheck-enabled nil)
-  (rtags-enable-standard-keybindings)
-  (rtags-diagnostics)
 
   :config
+  (rtags-enable-standard-keybindings)
+  (rtags-diagnostics)
   ;; currently irony provides better company support
   ;; (with-eval-after-load 'company
   ;;   (progn

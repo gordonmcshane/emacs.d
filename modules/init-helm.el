@@ -6,7 +6,6 @@
     :commands helm-projectile-on)
 
   (require 'helm-config)
-  ;;(require 'helm-projectile)
 
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
@@ -17,7 +16,10 @@
         helm-buffers-fuzzy-matching           t
         helm-move-to-line-cycle-in-source     t
         helm-ff-search-library-in-sexp        t
-        helm-ff-file-name-history-use-recentf t)
+        helm-ff-file-name-history-use-recentf t
+        helm-M-x-fuzzy-match                  t
+        helm-mode-fuzzy-match                 t
+        helm-apropos-fuzzy-match              t)
 
   ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
   ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -45,6 +47,10 @@
 
   (helm-mode +1)
 
-  (helm-projectile-on))
+  (helm-projectile-on)
+
+  (use-package helm-fuzzier
+    :init
+    (helm-fuzzier-mode 1)))
 
 (provide 'init-helm)

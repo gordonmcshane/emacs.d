@@ -1,5 +1,10 @@
-;; ethan-wspace supercedes the need for this
-(setq c-require-final-newline '())
+(use-package cc-mode
+  :load-path "lisp/cc-mode/"
+  :ensure nil
+  :commands (c-mode c++-mode objc-mode java-mode idl-mode awk-mode)
+  :init
+  ;; ethan-wspace supercedes the need for this
+  (setq c-require-final-newline '()))
 
 (defun smart-c-indent (arg)
   (interactive "P")
@@ -48,6 +53,7 @@
                    (if (followed-by '(innamespace namespace-close))
                        0
                      '+)))
+  (c-set-offset 'namespace-open 0)
   (c-set-offset 'inline-open 0))
 
 ;; force .h files to use c++-mode
@@ -60,7 +66,10 @@
 (defun my-valid-noise-names (x)
   (or (listp x) (stringp x)))
 
-(defcustom custom-c-noise-macro-names () "Tap-in for .dir-local noise macro names" :safe #'my-valid-noise-names)
+(defcustom custom-c-noise-macro-names ()
+  "Tap-in for .dir-local noise macro names"
+  :safe #'my-valid-noise-names
+  :group 'gordons-unfortunate-hacks)
 
 (defun my-recreate-noise-regexps ()
   (when (and (derived-mode-p 'c++-mode)
@@ -84,13 +93,13 @@
   (irony-cdb-autosetup-compile-options))
 
 (use-package irony
-  :commands irony-mode irony-cdb-autosetup-compile-options
+  ;;:commands (irony-mode irony-cdb-autosetup-compile-options)
   :init
   (setq my-irony-user-dir (expand-file-name "irony/" my-pkg-data-dir))
   (setq irony-server-install-prefix my-irony-user-dir
         irony-user-dir my-irony-user-dir)
 
-  (add-hook 'c-mode-common-hook (lambda () (irony-mode)))
+  (add-hook 'c-mode-common-hook #'irony-mode)
   (add-hook 'irony-mode-hook #'my-irony-mode-hook)
 
   :config
@@ -106,11 +115,11 @@
       (add-to-list 'company-backends 'company-irony)
       (add-to-list 'company-backends 'company-irony-c-headers)))
 
-  (use-package flycheck-irony
-    :commands flycheck-irony-setup
-    :init
-    (with-eval-after-load 'flycheck
-      (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
+  ;; (use-package flycheck-irony
+  ;;   :commands flycheck-irony-setup
+  ;;   :init
+  ;;   (with-eval-after-load 'flycheck
+  ;;     (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
   (use-package irony-eldoc
     :commands irony-eldoc
@@ -121,7 +130,7 @@
 (use-package cpputils-cmake
   :init
   (setq cppcm-write-flymake-makefile nil)
-  (add-hook 'c-mode-common-hook
+  (add-hook 'irony-mode-hook
             (lambda ()
               (when (derived-mode-p 'c-mode 'c++-mode)
                 (cppcm-reload-all)))))
