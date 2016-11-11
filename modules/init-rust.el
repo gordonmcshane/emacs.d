@@ -10,8 +10,7 @@
   (use-package racer
     :commands racer-mode
     :init
-    (defvar racer-cmd "/Users/gordon/bin/racer/target/release/racer")
-    (defvar racer-rust-src-path "/usr/local/src/rust/src")
+    (defvar racer-rust-src-path "/Users/gordon/.local/src/rustc-latest/src")
     (add-hook 'rust-mode-hook #'racer-mode)
     (add-hook 'racer-mode-hook #'eldoc-mode)
     (add-hook 'racer-mode-hook #'company-mode))

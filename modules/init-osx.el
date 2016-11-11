@@ -11,7 +11,6 @@
 ;; use homebrew bash 4+
 (setq explicit-shell-file-name "/usr/local/bin/bash")
 
-
 (setq calc-gnuplot-default-device "qt")
 
 (provide 'init-osx)

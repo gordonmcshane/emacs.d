@@ -8,7 +8,8 @@
 (use-package ag
   :init
   (setq-default ag-highlight-search t  ;; highlight the matches
-                ag-reuse-buffers t)  ;; reuse one *ag* buffer
+                ag-reuse-buffers t   ;; reuse one *ag* buffer
+                ag-group-matches nil) ;; messes with wgrep-ag
   (use-package wgrep-ag))
 
 (provide 'init-grep)

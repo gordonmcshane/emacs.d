@@ -96,10 +96,16 @@
   ;;:commands (irony-mode irony-cdb-autosetup-compile-options)
   :init
   (setq my-irony-user-dir (expand-file-name "irony/" my-pkg-data-dir))
+
   (setq irony-server-install-prefix my-irony-user-dir
         irony-user-dir my-irony-user-dir)
 
   (add-hook 'c-mode-common-hook #'irony-mode)
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (make-local-variable 'irony-additional-clang-options)
+              (push "-std=c++11" irony-additional-clang-options)))
+
   (add-hook 'irony-mode-hook #'my-irony-mode-hook)
 
   :config
